@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão Financeira na prática · Silvanio Gois · Portfólio</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ========== ESTILOS PROFISSIONAIS ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #0f2b3c;
+      color: white;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .header-brand img {
+      height: 80px;
+      width: auto;
+      border-radius: 8px;
+      border: 2px solid #a0b8cc;
+    }
+    .brand-text h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .brand-text p {
+      font-size: 1rem;
+      color: #bdd3e8;
+      font-weight: 300;
+    }
+    .whatsapp-button {
+      background: #1a5d3c;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      border: 1px solid #557c66;
+    }
+    .whatsapp-button:hover { background: #0f4029; }
+    nav {
+      background: #ffffff;
+      padding: 0.8rem 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    nav a i { color: #5f7d9c; font-size: 1rem; }
+    nav a:hover { border-bottom-color: #5f7d9c; }
+    main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 2rem;
+    }
+    .section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 2rem;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1e293b;
+      border-left: 5px solid #5f7d9c;
+      padding-left: 1.2rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section h2 i { color: #5f7d9c; font-size: 1.8rem; }
+    .section-intro {
+      background: #edf2f7;
+      padding: 1rem 1.8rem;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      color: #2d3c4c;
+      border: 1px solid #d0ddee;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-intro i {
+      color: #5f7d9c;
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* ========== LISTAS EXPANSÍVEIS ========== */
+    .task-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+    .task-item {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      transition: 0.2s;
+    }
+    .task-item:hover { border-color: #a0b8cc; }
+    .task-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .task-header .toggle { color: #5f7d9c; width: 20px; text-align: center; }
+    .task-header .toggle i { font-size: 1rem; transition: transform 0.2s; }
+    .task-header .title { flex: 1; font-weight: 500; font-size: 1.05rem; color: #1e293b; }
+    .urgency-badge {
+      background: #edf2f7;
+      color: #4a5b6b;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border: 1px solid #d0ddee;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .urgency-high {
+      background: #fbe9e7;
+      color: #aa4a3a;
+      border-color: #e0b3ac;
+    }
+    .detail-panel {
+      display: none;
+      background: #f8fafc;
+      margin: 0 1rem 1rem 3.5rem;
+      padding: 1.2rem 1.8rem;
+      border-radius: 16px;
+      border-left: 4px solid #5f7d9c;
+    }
+    .detail-panel.active { display: block; }
+    .detail-panel p { margin-bottom: 0.6rem; font-size: 1rem; color: #33475b; }
+    .detail-panel .howto {
+      border-top: 1px dashed #bdd3e8;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    /* ========== CARDS E GRIDS ========== */
+    .author-card {
+      display: flex;
+      gap: 2rem;
+      background: white;
+      border-radius: 30px;
+      padding: 2rem;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .author-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      background: #d0ddee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #5f7d9c;
+    }
+    .author-photo i { font-size: 3rem; color: #5f7d9c; }
+    .author-info h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .author-info p { margin: 0.3rem 0; color: #4a5b6b; }
+    .author-info i { color: #5f7d9c; width: 24px; }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .case-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid #d0ddee;
+      transition: 0.2s;
+    }
+    .case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0,40,60,0.15); }
+    .case-card h4 {
+      color: #0f2b3c;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .case-card h4 i { color: #1a5d3c; }
+    .case-card .resultado {
+      background: #1a5d3c10;
+      padding: 0.8rem;
+      border-radius: 16px;
+      margin: 1rem 0;
+      border-left: 4px solid #1a5d3c;
+    }
+    .case-card .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      color: #0f2b3c;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+    .case-card .btn-link:hover { border-bottom-color: #1a5d3c; }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+    }
+    .card h3 {
+      color: #2c3e50;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-bottom: 2px solid #d0ddee;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h3 i { color: #5f7d9c; font-size: 1.2rem; }
+    .card ul { list-style: none; }
+    .card li {
+      margin: 0.6rem 0;
+      padding: 0.4rem 0.8rem 0.4rem 2.2rem;
+      background: #f8fafc;
+      border-radius: 16px;
+      position: relative;
+      font-size: 0.95rem;
+      border: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .card li:hover { background: #edf2f7; }
+    .card li i {
+      color: #5f7d9c;
+      position: absolute;
+      left: 0.8rem;
+      top: 0.65rem;
+      font-size: 0.8rem;
+    }
+    .card .detail-panel {
+      margin: 0.5rem 0 0 0;
+      border-left: 4px solid #5f7d9c;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .kpi-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+    .kpi-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.05); border-color: #a0b8cc; }
+    .kpi-card h4 {
+      color: #0f2b3c;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .kpi-card .formula {
+      background: #f8fafc;
+      padding: 0.8rem;
+      border-radius: 12px;
+      font-family: monospace;
+      margin: 0.8rem 0;
+      border: 1px dashed #a0b8cc;
+    }
+    .kpi-card .expand-icon {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      color: #5f7d9c;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: white;
+      color: #4a5b6b;
+      width: 44px;
+      height: 44px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #d0ddee;
+      transition: 0.2s;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 100;
+    }
+    #back-to-top.show { opacity: 1; visibility: visible; }
+    #back-to-top:hover { background: #f0f4fa; border-color: #a0b8cc; transform: translateY(-2px); }
+
+    footer {
+      background: #0f2b3c;
+      color: #bdd3e8;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid #2f4d64;
+    }
+    footer .copyright { font-weight: 300; letter-spacing: 0.3px; }
+    footer .site { margin: 0.5rem 0; }
+    footer a {
+      color: #bdd3e8;
+      text-decoration: none;
+      font-weight: 400;
+      border-bottom: 1px solid #5f7d9c;
+    }
+    footer a:hover { color: white; }
+
+    @media (max-width: 700px) {
+      header { padding: 1rem; flex-direction: column; align-items: flex-start; }
+      nav { padding: 0.8rem 1rem; gap: 1rem; }
+      .task-header { flex-wrap: wrap; }
+      .detail-panel { margin-left: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <!-- IMAGEM OK, NA MESMA PASTA -->
+    <img src="Executivo_Silvanio_Gestor.PNG" alt="Silvanio Gois">
+    <div class="brand-text">
+      <h1>Gestão Financeira na prática</h1>
+      <p>Silvanio Gois · Visão multidisciplinar</p>
+    </div>
+  </div>
+  <a class="whatsapp-button" href="https://wa.me/5513988301094" target="_blank">
+    <i class="fab fa-whatsapp"></i> Contato
+  </a>
+</header>
+
+<nav>
+  <a href="#sobre"><i class="fas fa-user"></i> Sobre</a>
+  <a href="#operacional"><i class="fas fa-gear"></i> Operacional</a>
+  <a href="#analitico"><i class="fas fa-chart-simple"></i> Analítico</a>
+  <a href="#estrategico"><i class="fas fa-chess-board"></i> Estratégico</a>
+  <a href="#checklist"><i class="fas fa-square-check"></i> Checklist</a>
+  <a href="#kpis"><i class="fas fa-gauge-high"></i> KPIs</a>
+  <a href="#mentalidade"><i class="fas fa-brain"></i> Mentalidade</a>
+</nav>
+
+<main>
+  <!-- ========== SOBRE ========== -->
+  <section id="sobre" class="section">
+    <h2><i class="fas fa-user"></i> Quem está por trás deste guia</h2>
+    <div class="author-card">
+      <div class="author-photo"><i class="fas fa-user-graduate"></i></div>
+      <div class="author-info">
+        <h3>Silvanio Gois</h3>
+        <p><i class="fas fa-graduation-cap"></i> Graduando em Processos Gerenciais (conclusão junho/2026)</p>
+        <p><i class="fas fa-certificate"></i> Técnico em Administração · Técnico em Edificações</p>
+        <p><i class="fas fa-briefcase"></i> +15 anos integrando gestão de projetos, obras, infraestrutura e finanças</p>
+        <p><i class="fas fa-chart-line"></i> Especialidade prática: transformar conhecimento técnico em decisões financeiras</p>
+        <p><i class="fas fa-tools"></i> Da obra ao escritório: construí pontes entre engenharia, operação, estratégia e resultados</p>
+        <p style="margin-top:0.8rem; font-style:italic; background:#edf2f7; padding:0.8rem; border-radius:16px;"><i class="fas fa-quote-left"></i> Meu papel como gestor é traduzir a complexidade técnica em números que orientam o futuro. Não terceirizo a visão financeira — ela é parte do meu trabalho diário.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CASOS REAIS ========== -->
+  <section class="section">
+    <h2><i class="fas fa-briefcase"></i> Na prática: gestão com economia real</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Dois cases que unem técnica, gestão e resultados financeiros. Os números são reais e auditáveis pelos links.</div>
+    <div class="case-grid">
+      <div class="case-card">
+        <h4><i class="fas fa-building"></i> Reforma Corporativa 180m²</h4>
+        <p><strong>Orçamento inicial (SINAPI 2025):</strong> R$ 262.500 · <strong>Executado:</strong> R$ 249.900</p>
+        <div class="resultado">
+          <p><i class="fas fa-check-circle"></i> <strong>Economia nominal:</strong> R$ 12.600 (4,8%)</p>
+          <p><i class="fas fa-check-circle"></i> <strong>Prazo:</strong> 28 dias (previsto 35) → +20% produtividade</p>
+          <p><i class="fas fa-check-circle"></i> <strong>IDC (custo):</strong> 1,048 · <strong>SPI (prazo):</strong> 1,25</p>
+        </div>
+        <p><strong>Estratégias:</strong> Compra direta de fábrica (mobiliário -35%), negociação de drywall, almoxarifado just-in-time e modelagem BIM.</p>
+        <a href="https://silvaniosg.github.io/Gestao_end-to-end_de_reforma_corporativa/" target="_blank" class="btn-link"><i class="fas fa-arrow-up-right-from-square"></i> Ver case completo</a>
+      </div>
+      <div class="case-card">
+        <h4><i class="fas fa-water"></i> Saneamento Osasco/SP</h4>
+        <p><strong>Escopo:</strong> 6 equipes · 287km água + 194km esgoto · 22 mil ligações</p>
+        <div class="resultado">
+          <p><i class="fas fa-check-circle"></i> <strong>Produtividade:</strong> +38% (Presidente Altino)</p>
+          <p><i class="fas fa-check-circle"></i> <strong>Tempo médio:</strong> 4,2h → 1,8h (-58%)</p>
+          <p><i class="fas fa-check-circle"></i> <strong>Custo combustível:</strong> R$ 18.600 → R$ 14.500 (-22%)</p>
+          <p><i class="fas fa-check-circle"></i> <strong>Perdas de material:</strong> 12% → 4%</p>
+        </div>
+        <p><strong>Estratégias:</strong> Equipe de suporte móvel, almoxarifados regionais, roteirização inteligente, kits padronizados.</p>
+        <a href="https://silvaniosg.github.io/Gestao-Estrategica-No-Saneamento-Basico/" target="_blank" class="btn-link"><i class="fas fa-arrow-up-right-from-square"></i> Ver case completo</a>
+      </div>
+    </div>
+    <div style="margin-top:2rem; background:white; border-radius:30px; padding:1.5rem; border:1px solid #d0ddee;">
+      <p><i class="fas fa-lightbulb" style="color:#5f7d9c; margin-right:0.5rem;"></i> <strong>Em comum:</strong> Uso intensivo de dados, gestão de riscos antecipada e integração entre conhecimento técnico e ferramentas de controle financeiro (EVM, IDC, curva S). A economia veio de decisões embasadas, não de cortes lineares.</p>
+    </div>
+  </section>
+
+  <!-- ========== OPERACIONAL ========== -->
+  <section id="operacional" class="section">
+    <h2><i class="fas fa-gear"></i> Financeiro Operacional – chão de fábrica</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Rotinas que aplico diariamente. Clique nos itens para detalhes.</div>
+    <div class="task-list">
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Organizar contas a pagar/receber com antecedência</span><span class="urgency-badge urgency-high"><i class="far fa-clock"></i> Urgente</span></div><div class="detail-panel"><p><strong>Por que:</strong> Um boleto esquecido gera multa de 2% + juros de 1% ao mês. Em 12 meses, pode representar mais de 5% do lucro.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Toda manhã, confirmo vencimentos do dia +5. Às 17h, registro recebimentos e atualizo fluxo.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Conciliação bancária diária</span><span class="urgency-badge urgency-high"><i class="far fa-clock"></i> Urgente</span></div><div class="detail-panel"><p><strong>Por que:</strong> Evita descobrir furo no fim do mês. Saldo do app não é o real.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> 10 min/dia: comparo extratos com lançamentos. Diferença > R$ 100 investigo na hora.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Rotina de cobrança preventiva</span><span class="urgency-badge"><i class="far fa-calendar"></i> Rotina</span></div><div class="detail-panel"><p><strong>Por que:</strong> Contato amigável 3 dias antes reduz inadimplência em até 40%.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Segunda-feira ligo para clientes com vencimento na quinta/sexta. Pergunto se receberam o boleto, resolvo falhas.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Padronizar emissão de boletos/notas</span><span class="urgency-badge"><i class="far fa-calendar"></i> Rotina</span></div><div class="detail-panel"><p><strong>Por que:</strong> Evita retrabalho e erros de digitação.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Checklist obrigatório, modelo padrão. Revisão semanal.</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- ========== ANALÍTICO ========== -->
+  <section id="analitico" class="section">
+    <h2><i class="fas fa-chart-simple"></i> Financeiro Analítico – olhar clínico</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Interpretar números para enxergar padrões. Clique para detalhes.</div>
+    <div class="task-list">
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Fluxo de caixa projetado × realizado</span></div><div class="detail-panel"><p><strong>Por que:</strong> Acompanho semanalmente para identificar desvios antes que virem problema.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Toda sexta, comparo realizado com projetado. Desvio >5% investigo causa.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Indicadores de liquidez, endividamento e rotação</span></div><div class="detail-panel"><p><strong>Exemplo:</strong> Liquidez corrente <1,2 acende alerta. Endividamento >60% exige renegociação.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Calculo mensalmente e mantenho série histórica.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Margem de contribuição por produto/serviço</span></div><div class="detail-panel"><p><strong>Por que:</strong> Mostra o que realmente dá lucro. Na reforma, fretes não rateados estavam comendo a margem.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Rateio todos os custos variáveis por projeto. Margem <20% reavalia preço.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Ponto de equilíbrio operacional e financeiro</span></div><div class="detail-panel"><p><strong>Conceito:</strong> Operacional cobre custos fixos; financeiro inclui dívidas. Sei exatamente o mínimo para não perder dinheiro.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Atualizo sempre que mudo custos fixos. Monitoro mensalmente.</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- ========== ESTRATÉGICO ========== -->
+  <section id="estrategico" class="section">
+    <h2><i class="fas fa-chess-board"></i> Financeiro Estratégico – o volante</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Direcionar a empresa com base em cenários. Clique para detalhes.</div>
+    <div class="task-list">
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Planejamento orçamentário anual</span></div><div class="detail-panel"><p><strong>Como construo:</strong> Envolvo lideranças (bottom-up) e alinho com metas estratégicas (top-down).</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Exemplo:</strong> No saneamento, orçamos cada regional e acompanhamos desvios mensalmente.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Projeções de cenários (otimista, realista, pessimista)</span></div><div class="detail-panel"><p><strong>Por que:</strong> Para não ser pego de surpresa. No saneamento, simulamos economia com almoxarifados e erramos <2,5%.</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Como faço:</strong> Planilha com variações de receita e custo. Gatilhos para cada cenário.</span></div></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Avaliação de investimentos (VPL, TIR, payback)</span></div><div class="detail-panel"><p><strong>Critérios:</strong> Só invisto se VPL >0 e payback < 24 meses (para infra).</p><div class="howto"><i class="fas fa-lightbulb"></i><span><strong>Exemplo:</strong> Compra de equipamentos: calculamos economia de combustível e tempo, VPL positivo.</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- ========== CHECKLIST (com itens clicáveis) ========== -->
+  <section id="checklist" class="section">
+    <h2><i class="fas fa-square-check"></i> Checklist completo</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Rotinas por frequência. Clique em cada item para ver detalhes.</div>
+    <div class="checklist-grid">
+      <div class="card"><h3><i class="fas fa-sun"></i> Diárias</h3><ul><li onclick="toggleDetailFromList(this)" data-target="detail-dia1"><i class="fas fa-circle"></i> Conferir contas a pagar do dia + 5 dias</li><li onclick="toggleDetailFromList(this)" data-target="detail-dia2"><i class="fas fa-circle"></i> Conciliação bancária (10 min)</li><li onclick="toggleDetailFromList(this)" data-target="detail-dia3"><i class="fas fa-circle"></i> Registrar notas fiscais emitidas</li></ul><div id="detail-dia1" class="detail-panel">Confiro vencimentos e agendo pagamentos. Uso alertas no calendário.</div><div id="detail-dia2" class="detail-panel">Comparo extratos com sistema. Diferenças resolvidas no dia.</div><div id="detail-dia3" class="detail-panel">Padronizo emissão para evitar erros. Reviso se cliente recebeu.</div></div>
+      <div class="card"><h3><i class="fas fa-calendar-week"></i> Semanais</h3><ul><li onclick="toggleDetailFromList(this)" data-target="detail-sem1"><i class="fas fa-circle"></i> Revisar fluxo de caixa projetado</li><li onclick="toggleDetailFromList(this)" data-target="detail-sem2"><i class="fas fa-circle"></i> Acompanhar inadimplência (telefonemas)</li><li onclick="toggleDetailFromList(this)" data-target="detail-sem3"><i class="fas fa-circle"></i> Conferir custos variáveis</li></ul><div id="detail-sem1" class="detail-panel">Comparo realizado x previsto. Desvios >5% viram ação corretiva.</div><div id="detail-sem2" class="detail-panel">Ligo para clientes com atraso leve. Resolvo 80% antes de virar inadimplência.</div><div id="detail-sem3" class="detail-panel">Analiso combustível, material de escritório, etc. Busco reduções.</div></div>
+      <div class="card"><h3><i class="fas fa-calendar-alt"></i> Mensais</h3><ul><li onclick="toggleDetailFromList(this)" data-target="detail-men1"><i class="fas fa-circle"></i> Relatório gerencial completo (DRE, balanço)</li><li onclick="toggleDetailFromList(this)" data-target="detail-men2"><i class="fas fa-circle"></i> Calcular todos os KPIs</li><li onclick="toggleDetailFromList(this)" data-target="detail-men3"><i class="fas fa-circle"></i> Revisar orçado x real por centro de custo</li></ul><div id="detail-men1" class="detail-panel">Entrego para sócios com comentários. Destaque para desvios.</div><div id="detail-men2" class="detail-panel">Liquidez, margem, inadimplência, giro. Comparo com meses anteriores.</div><div id="detail-men3" class="detail-panel">Cada área explica variações. Ajustamos orçamento se necessário.</div></div>
+      <div class="card"><h3><i class="fas fa-calendar-plus"></i> Trimestrais</h3><ul><li onclick="toggleDetailFromList(this)" data-target="detail-tri1"><i class="fas fa-circle"></i> Revisar orçamento anual</li><li onclick="toggleDetailFromList(this)" data-target="detail-tri2"><i class="fas fa-circle"></i> Planejar investimentos (CAPEX)</li><li onclick="toggleDetailFromList(this)" data-target="detail-tri3"><i class="fas fa-circle"></i> Análise de crescimento</li></ul><div id="detail-tri1" class="detail-panel">Reviso premissas para os próximos trimestres.</div><div id="detail-tri2" class="detail-panel">Listo equipamentos necessários, calculo VPL.</div><div id="detail-tri3" class="detail-panel">Comparo receita com mesmo trimestre do ano anterior.</div></div>
+      <div class="card"><h3><i class="fas fa-calendar-check"></i> Anuais</h3><ul><li onclick="toggleDetailFromList(this)" data-target="detail-anu1"><i class="fas fa-circle"></i> Fechamento e planejamento anual</li><li onclick="toggleDetailFromList(this)" data-target="detail-anu2"><i class="fas fa-circle"></i> Revisão de contratos e indexadores</li><li onclick="toggleDetailFromList(this)" data-target="detail-anu3"><i class="fas fa-circle"></i> Balanço patrimonial auditado</li></ul><div id="detail-anu1" class="detail-panel">Consolidado com diretoria, metas para o próximo ano.</div><div id="detail-anu2" class="detail-panel">Negocio reajustes com fornecedores com base em índices.</div><div id="detail-anu3" class="detail-panel">Contrato auditoria externa para credibilidade.</div></div>
+    </div>
+  </section>
+
+  <!-- ========== KPIs (clicáveis) ========== -->
+  <section id="kpis" class="section">
+    <h2><i class="fas fa-gauge-high"></i> Indicadores-chave (KPIs)</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Fórmulas e interpretação. Clique nos cards para detalhes.</div>
+    <div class="kpi-grid">
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-water"></i> Liquidez Corrente</h4><div class="formula">Ativo Circulante / Passivo Circulante</div><p><strong>Ref:</strong> >1,5. Se menor, reviso contas a pagar.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Indica capacidade de pagar dívidas de curto prazo. Abaixo de 1,0 é alerta vermelho.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-percent"></i> Margem Líquida</h4><div class="formula">(LL / Receita Líquida) × 100</div><p><strong>Ref:</strong> 5-20% conforme setor. Monitoro tendência de queda.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Queda pode vir de aumento de custos ou perda de pricing. Investigo causas.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-clock"></i> Prazo Médio Recebimento</h4><div class="formula">(Duplicatas a Receber / Receita Bruta Mensal) × 30</div><p><strong>Quanto menor, melhor.</strong> Acima de 45 dias exige revisão.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Se cresce, posso estar vendendo para maus pagadores. Reavalio limites.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-exclamation-triangle"></i> Inadimplência</h4><div class="formula">(Atraso >30d / Total a Receber) × 100</div><p><strong>Ref:</strong> <3%. Aciono cobrança.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Acima de 5% reviso concessão de crédito.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-truck"></i> Giro de Estoque</h4><div class="formula">CMV / Estoque médio</div><p>Alto giro = eficiência; baixo = capital empatado.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Comparo com média do setor. Se baixo, faço promoção.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="kpi-card" onclick="toggleDetailFromCard(this)"><h4><i class="fas fa-chart-pie"></i> EBITDA</h4><div class="formula">Lucro operacional + depreciação + amortização</div><p>Geração de caixa das operações.</p><div class="detail-panel" style="display:none;"><p><strong>Interpretação:</strong> Indica saúde operacional antes de efeitos financeiros e impostos. Uso para comparar com concorrentes.</p></div><span class="expand-icon"><i class="fas fa-chevron-down"></i></span></div>
+    </div>
+  </section>
+
+  <!-- ========== MENTALIDADE ========== -->
+  <section id="mentalidade" class="section">
+    <h2><i class="fas fa-brain"></i> Mentalidade de gestor</h2>
+    <div class="section-intro"><i class="fas fa-info-circle"></i> Princípios que aplico no dia a dia. Clique para exemplos.</div>
+    <div class="task-list">
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Não terceirizo a visão do fluxo de caixa</span></div><div class="detail-panel"><p>Preciso sentir na pele, não apenas ler relatórios. Isso me permite antecipar problemas.</p></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Lucro não é sobra, é recurso para crescer</span></div><div class="detail-panel"><p>Destino parte do lucro para inovação, treinamento e reserva.</p></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Separo PF da PJ rigorosamente</span></div><div class="detail-panel"><p>Pró-labore definido, contas pessoais nunca misturadas. A empresa tem que se sustentar sozinha.</p></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Inadimplência se trata antes</span></div><div class="detail-panel"><p>Relacionamento e comunicação evitam 80% dos atrasos.</p></div></div>
+      <div class="task-item"><div class="task-header" onclick="toggleDetail(this)"><span class="toggle"><i class="fas fa-chevron-right"></i></span><span class="title">Dados são a base</span></div><div class="detail-panel"><p>Como nos cases, decisão sem dado é palpite.</p></div></div>
+    </div>
+  </section>
+</main>
+
+<a href="#" id="back-to-top" class="show" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></a>
+
+<footer>
+  <div class="copyright">© 2026 Silvanio Gois - Todos os direitos reservados</div>
+  <div class="site"><a href="https://www.silvaniogois.com.br/" target="_blank">www.silvaniogois.com.br</a></div>
+  <p style="margin-top:1.5rem; opacity:0.7;"><i class="fas fa-handshake"></i> Técnico em Admin & Edificações · Graduando em Processos Gerenciais · Gestor na prática</p>
+</footer>
+
+<script>
+  // Função para itens de tarefa (operacional, analítico, estratégico, mentalidade)
+  function toggleDetail(headerElement) {
+    const taskItem = headerElement.closest('.task-item');
+    const panel = taskItem.querySelector('.detail-panel');
+    const toggleIcon = headerElement.querySelector('.toggle i');
+    panel.classList.toggle('active');
+    if (panel.classList.contains('active')) {
+      toggleIcon.classList.remove('fa-chevron-right');
+      toggleIcon.classList.add('fa-chevron-down');
+    } else {
+      toggleIcon.classList.remove('fa-chevron-down');
+      toggleIcon.classList.add('fa-chevron-right');
+    }
+  }
+
+  // Função para itens do checklist (baseada em data-target)
+  function toggleDetailFromList(listItem) {
+    const targetId = listItem.getAttribute('data-target');
+    if (targetId) {
+      const panel = document.getElementById(targetId);
+      if (panel) {
+        panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+      }
+    }
+  }
+
+  // Função para cards de KPI
+  function toggleDetailFromCard(card) {
+    const panel = card.querySelector('.detail-panel');
+    const icon = card.querySelector('.expand-icon i');
+    if (panel) {
+      if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block';
+        if (icon) { icon.classList.remove('fa-chevron-down'); icon.classList.add('fa-chevron-up'); }
+      } else {
+        panel.style.display = 'none';
+        if (icon) { icon.classList.remove('fa-chevron-up'); icon.classList.add('fa-chevron-down'); }
+      }
+    }
+  }
+
+  // Back to top
+  window.addEventListener('scroll', function() {
+    const btn = document.getElementById('back-to-top');
+    btn.classList.toggle('show', window.scrollY > 400);
+  });
+  document.getElementById('back-to-top').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
