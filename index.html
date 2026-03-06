@@ -191,7 +191,7 @@
       padding: 2rem;
       border: 1px solid #e2e8f0;
       margin-bottom: 2rem;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
     }
     .author-photo {
@@ -203,11 +203,14 @@
       align-items: center;
       justify-content: center;
       border: 3px solid #5f7d9c;
+      flex-shrink: 0;
     }
     .author-photo i { font-size: 3rem; color: #5f7d9c; }
+    .author-info {
+      flex: 1;
+      min-width: 280px;
+    }
     .author-info h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    .author-info p { margin: 0.3rem 0; color: #4a5b6b; }
-    .author-info i { color: #5f7d9c; width: 24px; }
 
     .case-grid {
       display: grid;
@@ -387,6 +390,8 @@
       nav { padding: 0.8rem 1rem; gap: 1rem; }
       .task-header { flex-wrap: wrap; }
       .detail-panel { margin-left: 0.5rem; }
+      .author-card { flex-direction: column; align-items: center; text-align: center; }
+      .author-info { text-align: left; } /* mantém alinhamento à esquerda para melhor leitura */
     }
   </style>
 </head>
@@ -417,19 +422,71 @@
 </nav>
 
 <main>
-  <!-- ========== SOBRE ========== -->
+  <!-- ========== SOBRE - IDENTIDADE PROFISSIONAL (REFORMULADA) ========== -->
   <section id="sobre" class="section">
-    <h2><i class="fas fa-user"></i> Quem está por trás deste guia</h2>
+    <h2><i class="fas fa-user-tie"></i> Identidade Profissional</h2>
     <div class="author-card">
-      <div class="author-photo"><i class="fas fa-user-graduate"></i></div>
+      <div class="author-photo"><i class="fas fa-user-tie"></i></div>
       <div class="author-info">
         <h3>Silvanio Gois</h3>
-        <p><i class="fas fa-graduation-cap"></i> Graduando em Processos Gerenciais (conclusão junho/2026)</p>
-        <p><i class="fas fa-certificate"></i> Técnico em Administração · Técnico em Edificações</p>
-        <p><i class="fas fa-briefcase"></i> +15 anos integrando gestão de projetos, obras, infraestrutura e finanças</p>
-        <p><i class="fas fa-chart-line"></i> Especialidade prática: transformar conhecimento técnico em decisões financeiras</p>
-        <p><i class="fas fa-tools"></i> Da obra ao escritório: construí pontes entre engenharia, operação, estratégia e resultados</p>
-        <p style="margin-top:0.8rem; font-style:italic; background:#edf2f7; padding:0.8rem; border-radius:16px;"><i class="fas fa-quote-left"></i> Meu papel como gestor é traduzir a complexidade técnica em números que orientam o futuro. Não terceirizo a visão financeira — ela é parte do meu trabalho diário.</p>
+        <p style="font-size:1.1rem; font-weight:500; margin-bottom:1.5rem;">
+          Minha atuação é orientada por dados, do estratégico ao operacional, focada no planejamento, execução e melhoria contínua de processos e projetos.
+        </p>
+
+        <!-- Estrutura de Atuação (Ciclo de Gestão) -->
+        <div style="margin: 2rem 0;">
+          <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #0f2b3c; margin-bottom: 1rem;">
+            <i class="fas fa-diagram-project"></i> Estrutura de Atuação (Ciclo de Gestão)
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <!-- Estratégico -->
+            <div style="background: #f0f5fa; padding: 1.2rem; border-radius: 16px; border-left: 4px solid #5f7d9c;">
+              <i class="fas fa-chess-queen" style="color:#5f7d9c; font-size:1.4rem;"></i>
+              <h5 style="margin:0.7rem 0 0.3rem; font-size:1.1rem;">Estratégico</h5>
+              <p style="font-size:0.95rem; color:#2d3c4c;">Definição de objetivos, análise de cenários, tomada de decisão orientada por dados e melhoria contínua.</p>
+            </div>
+            <!-- Tático -->
+            <div style="background: #f0f5fa; padding: 1.2rem; border-radius: 16px; border-left: 4px solid #5f7d9c;">
+              <i class="fas fa-chart-gantt" style="color:#5f7d9c; font-size:1.4rem;"></i>
+              <h5 style="margin:0.7rem 0 0.3rem; font-size:1.1rem;">Tático</h5>
+              <p style="font-size:0.95rem; color:#2d3c4c;">Planejamento organizacional, estruturação de processos, gestão de recursos e coordenação de projetos.</p>
+            </div>
+            <!-- Operacional -->
+            <div style="background: #f0f5fa; padding: 1.2rem; border-radius: 16px; border-left: 4px solid #5f7d9c;">
+              <i class="fas fa-helmet-safety" style="color:#5f7d9c; font-size:1.4rem;"></i>
+              <h5 style="margin:0.7rem 0 0.3rem; font-size:1.1rem;">Operacional</h5>
+              <p style="font-size:0.95rem; color:#2d3c4c;">Execução técnica, acompanhamento de atividades, controle de prazos, qualidade e resultados.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Competências-chave -->
+        <div style="margin: 2rem 0;">
+          <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #0f2b3c; margin-bottom: 1rem;">
+            <i class="fas fa-key"></i> Competências-chave
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.7rem 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Planejamento organizacional</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Gestão de processos</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Gestão de projetos e operações</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Análise de dados aplicada à gestão</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Melhoria contínua</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Otimização de recursos e resultados</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Tomada de decisão orientada por dados</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-check-circle" style="color:#1a5d3c; font-size:1rem;"></i> Uso de ferramentas digitais e IA para apoio à gestão</div>
+          </div>
+        </div>
+
+        <!-- Abordagem Profissional -->
+        <div style="margin-top: 2rem; background: #edf2f7; padding: 1.5rem; border-radius: 20px; border-left: 4px solid #1a5d3c;">
+          <p style="margin-bottom: 0.8rem;">
+            <i class="fas fa-quote-left" style="color:#1a5d3c; margin-right:0.3rem;"></i>
+            <strong>Abordagem Profissional:</strong> Baseio minha atuação em dados, eficiência operacional e melhoria contínua, conectando estratégia, planejamento e execução para gerar resultados consistentes.
+          </p>
+          <p style="font-style: italic; color: #2c3e50; margin:0;">
+            Como gestor, penso estrategicamente, organizo processos, acompanho a execução na prática e utilizo dados para melhorar resultados, buscando sempre fechar o ciclo completo da gestão..
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -549,7 +606,7 @@
 <footer>
   <div class="copyright">© 2026 Silvanio Gois - Todos os direitos reservados</div>
   <div class="site"><a href="https://www.silvaniogois.com.br/" target="_blank">www.silvaniogois.com.br</a></div>
-  <p style="margin-top:1.5rem; opacity:0.7;"><i class="fas fa-handshake"></i> Técnico em Admin & Edificações · Graduando em Processos Gerenciais · Gestor na prática</p>
+  <p style="margin-top:1.5rem; opacity:0.7;"><i class="fas fa-handshake"></i> Da estratégia à operação, conectando processos, pessoas e resultados.</p>
 </footer>
 
 <script>
